@@ -3,6 +3,7 @@ from discord.ext import commands
 
 import random
 import re
+from datetime import date
 
 bot=commands.Bot(command_prefix='!')
 
@@ -13,11 +14,17 @@ async def on_ready():
 
 @bot.command()
 async def 도움말(ctx):
-    await ctx.channel.send('없어 인마', reference=ctx.message)
+    embed = discord.Embed(title="도움말", description="피쭈봇 사용법", color=0x62c1cc)
+    embed.set_footer(text="피쭈 제작")
 
-@bot.command()
-async def 동동주줘(ctx):
-    await ctx.channel.send('🍶', reference=ctx.message)
+    embed.add_field(name='`!하이`', value='하이하이', inline=False)
+    embed.add_field(name='`!나가`', value='감말이 자꾸 나가라해서 추가함', inline=False)
+    embed.add_field(name='`!동동주줘`', value='동동주 줌', inline=False)
+    embed.add_field(name='`!마법피쭈`', value='마법의 소라고둥 피쭈 버전', inline=False)
+    embed.add_field(name='`!오늘의운세`', value='오늘의 운세', inline=False)
+    embed.add_field(name='`!콜마넴 @누구 @누구 @누구`', value='콜마이네임 게임하기(본인 포함)', inline=False)
+
+    await ctx.channel.send(embed=embed, reference=ctx.message)
 
 @bot.command()
 async def 하이(ctx):
@@ -26,6 +33,10 @@ async def 하이(ctx):
 @bot.command()
 async def 나가(ctx):
     await ctx.channel.send('싫어 -_-', reference=ctx.message)
+
+@bot.command()
+async def 동동주줘(ctx):
+    await ctx.channel.send('🍶', reference=ctx.message)
 
 @bot.command()
 async def 마법피쭈(ctx):
@@ -56,5 +67,15 @@ async def 콜마넴(ctx, *, text):
 
                 user = await bot.fetch_user(numbers[idx1])
                 await user.send(nick + '의 동물은 ' + animals[randoms[idx2]] + '!')
+
+@bot.command()
+async def 오늘의운세(ctx):
+    fortune = ['🙂', '😁', '😆', '😌', '😚', '🤪', '🤨', '😛', '😎', '😔', '😖', '🤭', '🥱', '😤', '😑', '😝', '😊']
+    num = int(re.sub(r'[^0-9]', '', str(ctx.author)))
+    month = date.today().month
+    day = date.today().day
+
+    index = (num * day + month) % 17
+    await ctx.channel.send(fortune[index], reference=ctx.message)
 
 bot.run('ODk5NjAwODYzNTc4OTYzOTY4.YW1Ilw.F7B0d0uz4mWM3CdyiABP3VAQzso')
