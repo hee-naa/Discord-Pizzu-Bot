@@ -14,7 +14,7 @@ async def on_ready():
 
 @bot.command()
 async def 도움말(ctx):
-    embed = discord.Embed(title="도움말", description="피쭈봇 사용법", color=0x62c1cc)
+    embed = discord.Embed(title="도움말", description="피쭈봇 사용법", color=0xb0c9d4)
     embed.set_footer(text="피쭈 제작")
 
     embed.add_field(name='`!하이`', value='하이하이', inline=False)
