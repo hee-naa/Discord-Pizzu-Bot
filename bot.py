@@ -69,6 +69,21 @@ async def 콜마넴(ctx, *, text):
                 await user.send(nick + '의 동물은 ' + animals[randoms[idx2]] + '!')
 
 @bot.command()
+async def 바보(ctx, id):
+    num = re.sub(r'[^0-9]', '', id)
+    name = await ctx.message.guild.fetch_member(num)
+    if name.nick is None:
+        fullnick = await bot.fetch_user(num)
+        nick = fullnick.name
+    else:
+        nick = name.nick
+
+    embed = discord.Embed(color=0xb0c9d4)
+    embed.set_image(url='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/0779915b-1847-4de2-9592-d2701bdeef12/%E1%84%81%E1%85%A9%E1%84%87%E1%85%AE%E1%84%80%E1%85%B5.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211029%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211029T100835Z&X-Amz-Expires=86400&X-Amz-Signature=9050ad91b5125ce1b48681ca307e566581ecf002a558919633cfdc60cd2c540c&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25E1%2584%2581%25E1%2585%25A9%25E1%2584%2587%25E1%2585%25AE%25E1%2584%2580%25E1%2585%25B5.gif')
+
+    await ctx.channel.send(nick + ' 바보~~', embed=embed)
+
+@bot.command()
 async def 오늘의운세(ctx):
     fortune = ['🙂', '😁', '😆', '😌', '😚', '🤪', '🤨', '😛', '😎', '😔', '😖', '🤭', '🥱', '😤', '😑', '😝', '😊']
     num = int(re.sub(r'[^0-9]', '', str(ctx.author)))
