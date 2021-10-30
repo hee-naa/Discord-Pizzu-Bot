@@ -45,7 +45,7 @@ async def 동동주줘(ctx):
 @bot.command()
 async def 마법피쭈(ctx):
     num = random.randint(0,12)
-    res = ['가만히 있어', '마음대로 해', '무조건 실행', '잘 생각해봐', '안 그러는 게 좋을 걸', '좋아', '화이팅', '생각 좀 해', '뇌에 힘 줘', '그러던가 말던가', '되겠냐', '유감', '괜찮네']
+    res = ['가만히 있어', '마음대로 해', '무조건 해야지', '잘 생각해봐', '안 그러는 게 좋을 걸', '좋아', '화이팅', '생각 좀 해', '뇌에 힘 줘', '그러던가 말던가', '되겠냐', '유감', '괜찮네']
     await ctx.channel.send(res[num], reference=ctx.message)
 
 @bot.command()
@@ -124,6 +124,12 @@ async def 감사(ctx):
     embed = discord.Embed(color=0xb0c9d4)
     embed.set_image(url='https://discord-cdn.s3.ap-northeast-1.amazonaws.com/thanks-1.gif')
     await ctx.channel.send('감사합니다.', embed=embed)
+
+@bot.command()
+async def 생축(ctx):
+    embed = discord.Embed(color=0xb0c9d4)
+    embed.set_image(url='https://blog.kakaocdn.net/dn/cweeN8/btqNqeqK3U2/JM8NikD3KtsQXmLuYRwwkK/img.gif')
+    await ctx.channel.send('담댁 생일 축하해~!🎂🎉', embed=embed)
 
 @bot.command()
 async def 오늘의운세(ctx):
