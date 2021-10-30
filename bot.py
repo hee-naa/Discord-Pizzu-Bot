@@ -129,7 +129,7 @@ async def 감사(ctx):
 async def 생축(ctx):
     embed = discord.Embed(color=0xb0c9d4)
     embed.set_image(url='https://blog.kakaocdn.net/dn/cweeN8/btqNqeqK3U2/JM8NikD3KtsQXmLuYRwwkK/img.gif')
-    await ctx.channel.send('담댁 생일 축하해~!🎂🎉', embed=embed)
+    await ctx.channel.send('담댁 생일 축하해~! 🎂🎉', embed=embed)
 
 @bot.command()
 async def 오늘의운세(ctx):
