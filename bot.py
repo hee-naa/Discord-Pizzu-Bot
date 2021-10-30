@@ -41,18 +41,51 @@ async def 동동주줘(ctx):
 
 @bot.command()
 async def 마법피쭈(ctx):
-    num = random.randint(0, 12)
+    num = random.randint(0,12)
     res = ['가만히 있어', '마음대로 해', '무조건 실행', '잘 생각해봐', '안 그러는 게 좋을 걸', '좋아', '화이팅', '생각 좀 해', '뇌에 힘 줘', '그러던가 말던가', '되겠냐', '유감', '괜찮네']
     await ctx.channel.send(res[num], reference=ctx.message)
 
 @bot.command()
 async def 콜마넴(ctx, *, text):
-    animals = ['개미핥기', '목도리도마뱀', '알파카', '대머리독수리', '흑돼지', '진돗개', '바다코끼리', '원숭이', '오리너구리', '나무늘보', '아나콘다', '송충이', '반달가슴곰', '비버', '전기뱀장어', '범고래', '북극여우', '하늘다람쥐']
-    numbers = re.findall(r'\d+', text)
+    embed = discord.Embed(title='주제를 고르세연')
+    embed.add_field(name='동물', value='🐶')
+    embed.add_field(name='인물', value='🧑🏻')
+    msg = await ctx.channel.send(embed=embed)
 
+    await msg.add_reaction('🐶')
+    await msg.add_reaction('🧑🏻')
+
+    try:
+        def check(reaction, user):
+            return str(reaction) in ['🐶','🧑🏻'] and \
+            user == ctx.author and reaction.message.id == msg.id
+        reaction, user = await bot.wait_for('reaction_add', check=check)
+        if (str(reaction) == '🐶'):
+            embed = discord.Embed(title='주제를 고르세연', description='동물을 골랐삼')
+            type = '동물'
+            list = ['까마귀', '까치', '개미핥기', '고라니', '고슴도치', '꿩', '기러기', '나무늘보', '낙타', '너구리',
+               '노루', '늑대', '당나귀', '딱따구리', '대머리독수리', '도롱뇽', '두더지', '라마', '목도리도마뱀', '물개',
+               '바다코끼리', '거북이', '반달가슴곰', '박쥐', '범고래', '병아리', '백조', '북극여우', '비버', '송충이',
+               '스컹크', '시베리안허스키', '아나콘다', '알파카', '오리너구리', '원숭이', '전기뱀장어', '족제비', '진돗개', '청개구리',
+               '청둥오리', '치와와', '친칠라', '침팬지', '캥거루', '코끼리', '코뿔소', '펭귄', '표범', '푸들',
+               '하늘다람쥐', '하마', '황새', '홍학', '흑돼지', '흰수염고래']
+        elif (str(reaction) == '🧑🏻'):
+            embed = discord.Embed(title='주제를 고르세연', description='인물을 골랐삼')
+            type = '인물'
+            list = ['거미', '공자', '광개토대왕', '김다미', '김광규', '다비치 강민경', '딘딘', '레드벨벳 예리', '레드벨벳 조이', '루트비히 판 베토벤',
+              '보아', '블랙핑크 로제', '블랙핑크 제니', '선미', '소녀시대 태연', '스칼렛 요한슨', '스티브 잡스', '신사임당', '아이유', '아이키',
+              '아인슈타인', '아이즈원 장원영', '안젤리나 졸리', '(여자)아이들 소연', '에스파 카리나', '에일리', '엠마 스톤', '오마이걸 아린', '위키미키 최유정', '이달의소녀 츄',
+              '이영지', '이재용', '있지 채령', '자빱', '전소미', '전지현', '재재', '제시', '진지희', '크리스틴 스튜어트',
+              '페이커', '토마스 에디슨', '퇴계 이황', '트럼프', '한소희', 'f(x) 크리스탈', '피쭈봇', '녹차', '밀구', '치즈',
+              '렘마', '복셔벗', '달미', '주이', '인세', '감자말랭이']
+        await msg.clear_reactions()
+        await msg.edit(embed=embed)
+    except: pass
+
+    numbers = re.findall(r'\d+', text)
     randoms = []
     while len(randoms) < len(numbers):
-        ran = random.randint(0,17)
+        ran = random.randint(0,len(list)-1)
         if ran not in randoms:
             randoms.append(ran)
     
@@ -67,7 +100,7 @@ async def 콜마넴(ctx, *, text):
                     nick = mem.nick
 
                 user = await bot.fetch_user(numbers[idx1])
-                await user.send(nick + '의 동물은 ' + animals[randoms[idx2]] + '!')
+                await user.send(nick + '의 ' + type + '은 ' + list[randoms[idx2]] + '!')
 
 @bot.command()
 async def 바보(ctx, id):
