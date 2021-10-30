@@ -18,6 +18,7 @@ async def 도움말(ctx):
     embed.set_footer(text="피쭈 제작")
 
     embed.add_field(name='`!하이`', value='하이하이', inline=False)
+    embed.add_field(name='`!감사`', value='감사링', inline=False)
     embed.add_field(name='`!나가`', value='감말이 자꾸 나가라해서 추가함', inline=False)
     embed.add_field(name='`!동동주줘`', value='동동주 줌', inline=False)
     embed.add_field(name='`!바보 @누구`', value='바보~~', inline=False)
@@ -29,11 +30,13 @@ async def 도움말(ctx):
 
 @bot.command()
 async def 하이(ctx):
-    await ctx.channel.send('하이~~!', reference=ctx.message)
+    await ctx.channel.send('하이루', reference=ctx.message)
 
 @bot.command()
 async def 나가(ctx):
-    await ctx.channel.send('싫어 -_-', reference=ctx.message)
+    num = random.randint(0,1)
+    res = ['가나', '니가 나가']
+    await ctx.channel.send(res[num], reference=ctx.message)
 
 @bot.command()
 async def 동동주줘(ctx):
@@ -73,7 +76,7 @@ async def 콜마넴(ctx, *, text):
             embed = discord.Embed(title='주제를 고르세연', description='인물을 골랐삼', color=0xb0c9d4)
             type = '인물'
             list = ['거미', '공자', '광개토대왕', '김다미', '김광규', '다비치 강민경', '딘딘', '레드벨벳 예리', '레드벨벳 조이', '루트비히 판 베토벤',
-              '보아', '블랙핑크 로제', '블랙핑크 제니', '선미', '소녀시대 태연', '스칼렛 요한슨', '스티브 잡스', '신사임당', '아이유', '아이키',
+              '보아', '블랙핑크 로제', '블랙핑크 제니', '원더걸스 선미', '소녀시대 태연', '스칼렛 요한슨', '스티브 잡스', '신사임당', '아이유', '아이키',
               '아인슈타인', '아이즈원 장원영', '안젤리나 졸리', '(여자)아이들 소연', '에스파 카리나', '에일리', '엠마 스톤', '오마이걸 아린', '위키미키 최유정', '이달의소녀 츄',
               '이영지', '이재용', '있지 채령', '자빱', '전소미', '전지현', '재재', '제시', '진지희', '크리스틴 스튜어트',
               '페이커', '토마스 에디슨', '퇴계 이황', '트럼프', '한소희', 'f(x) 크리스탈', '피쭈봇', '녹차', '밀구', '치즈',
@@ -113,9 +116,14 @@ async def 바보(ctx, id):
         nick = name.nick
 
     embed = discord.Embed(color=0xb0c9d4)
-    embed.set_image(url='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/0779915b-1847-4de2-9592-d2701bdeef12/%E1%84%81%E1%85%A9%E1%84%87%E1%85%AE%E1%84%80%E1%85%B5.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211029%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211029T100835Z&X-Amz-Expires=86400&X-Amz-Signature=9050ad91b5125ce1b48681ca307e566581ecf002a558919633cfdc60cd2c540c&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25E1%2584%2581%25E1%2585%25A9%25E1%2584%2587%25E1%2585%25AE%25E1%2584%2580%25E1%2585%25B5.gif%22')
-
+    embed.set_image(url='https://discord-cdn.s3.ap-northeast-1.amazonaws.com/babo-1.gif')
     await ctx.channel.send(nick + ' 바보~~', embed=embed)
+
+@bot.command()
+async def 감사(ctx):
+    embed = discord.Embed(color=0xb0c9d4)
+    embed.set_image(url='https://discord-cdn.s3.ap-northeast-1.amazonaws.com/thanks-1.gif')
+    await ctx.channel.send('감사합니다.', embed=embed)
 
 @bot.command()
 async def 오늘의운세(ctx):
