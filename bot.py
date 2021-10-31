@@ -64,7 +64,7 @@ async def 콜마넴(ctx, *, text):
             user == ctx.author and reaction.message.id == msg.id
         reaction, user = await bot.wait_for('reaction_add', check=check)
         if (str(reaction) == '🐶'):
-            embed = discord.Embed(title='주제를 고르세연', description='동물을 골랐삼', color=0xb0c9d4)
+            embed = discord.Embed(title='주제를 고르세요', description='동물', color=0xb0c9d4)
             type = '동물'
             list = ['까마귀', '까치', '개미핥기', '고라니', '고슴도치', '꿩', '기러기', '나무늘보', '낙타', '너구리',
                '노루', '늑대', '당나귀', '딱따구리', '대머리독수리', '도롱뇽', '두더지', '라마', '목도리도마뱀', '물개',
@@ -73,14 +73,13 @@ async def 콜마넴(ctx, *, text):
                '청둥오리', '치와와', '친칠라', '침팬지', '캥거루', '코끼리', '코뿔소', '펭귄', '표범', '푸들',
                '하늘다람쥐', '하마', '황새', '홍학', '흑돼지', '흰수염고래']
         elif (str(reaction) == '🧑🏻'):
-            embed = discord.Embed(title='주제를 고르세연', description='인물을 골랐삼', color=0xb0c9d4)
+            embed = discord.Embed(title='주제를 고르세요', description='인물', color=0xb0c9d4)
             type = '인물'
             list = ['거미', '공자', '광개토대왕', '김다미', '김광규', '다비치 강민경', '딘딘', '레드벨벳 예리', '레드벨벳 조이', '루트비히 판 베토벤',
               '보아', '블랙핑크 로제', '블랙핑크 제니', '원더걸스 선미', '소녀시대 태연', '스칼렛 요한슨', '스티브 잡스', '신사임당', '아이유', '아이키',
               '아인슈타인', '아이즈원 장원영', '안젤리나 졸리', '(여자)아이들 소연', '에스파 카리나', '에일리', '엠마 스톤', '오마이걸 아린', '위키미키 최유정', '이달의소녀 츄',
               '이영지', '이재용', '있지 채령', '자빱', '전소미', '전지현', '재재', '제시', '진지희', '크리스틴 스튜어트',
-              '페이커', '토마스 에디슨', '퇴계 이황', '트럼프', '한소희', 'f(x) 크리스탈', '피쭈봇', '녹차', '밀구', '치즈',
-              '렘마', '복셔벗', '달미', '주이', '인세', '감자말랭이']
+              '페이커', '토마스 에디슨', '퇴계 이황', '트럼프', '한소희', 'f(x) 크리스탈']
         await msg.clear_reactions()
         await msg.edit(embed=embed)
     except: pass
@@ -103,6 +102,7 @@ async def 콜마넴(ctx, *, text):
                     nick = mem.nick
 
                 user = await bot.fetch_user(numbers[idx1])
+                print(nick + ' : ' + list[randoms[idx2]])
                 await user.send(nick + '의 ' + type + '은 ' + list[randoms[idx2]] + '!')
 
 @bot.command()
