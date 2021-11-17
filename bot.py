@@ -131,7 +131,7 @@ async def 바보가되거라(ctx, id):
     
     babo = '바보' + nick
     name.edit(nick=babo)
-    await ctx.channel.send(nick + '은 바보가 되었습니다..')
+    await ctx.channel.send(nick + '는(은) 바보가 되었습니다..')
 
 @bot.command()
 async def 감사(ctx):
