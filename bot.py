@@ -120,20 +120,6 @@ async def 바보(ctx, id):
     await ctx.channel.send(nick + ' 바보~~', embed=embed)
 
 @bot.command()
-async def 바보가되거라(ctx, id):
-    num = re.sub(r'[^0-9]', '', id)
-    name = await ctx.message.guild.fetch_member(num)
-    if name.nick is None:
-        fullnick = await bot.fetch_user(num)
-        nick = fullnick.name
-    else:
-        nick = name.nick
-    
-    babo = '바보' + nick
-    await name.edit(nick=babo)
-    await ctx.channel.send(nick + '는(은) 바보가 되었습니다..')
-
-@bot.command()
 async def 감사(ctx):
     embed = discord.Embed(color=0xb0c9d4)
     embed.set_image(url='https://discord-cdn.s3.ap-northeast-1.amazonaws.com/thanks-1.gif')
