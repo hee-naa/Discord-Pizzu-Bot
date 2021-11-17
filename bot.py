@@ -27,6 +27,8 @@ async def 도움말(ctx):
     embed.add_field(name='`!마법피쭈`', value='마법의 소라고둥 피쭈 버전', inline=False)
     embed.add_field(name='`!오늘의운세`', value='오늘의 운세', inline=False)
     embed.add_field(name='`!콜마넴 @누구 @누구 @누구`', value='콜마이네임 게임하기(본인 포함)', inline=False)
+    embed.add_field(name='`!입실`', value='돗쥐의 독서실 입실', inline=False)
+    embed.add_field(name='`!퇴실`', value='돗쥐의 독서실 퇴실', inline=False)
 
     await ctx.channel.send(embed=embed, reference=ctx.message)
 
@@ -153,7 +155,7 @@ async def 입실(ctx):
         'intime' : time
     }
     requests.post(url, data=data)
-    await ctx.channel.send(nick + ' 입실 완료 아자아자!')
+    await ctx.channel.send(nick + ' 입실 완료')
 
 @bot.command()
 async def 퇴실(ctx):
@@ -175,7 +177,7 @@ async def 퇴실(ctx):
         'outtime' : time
     }
     requests.post(url, data=data)
-    await ctx.channel.send(nick + ' 퇴실 완료 수고했고~')
+    await ctx.channel.send(nick + ' 퇴실 완료')
 
 @bot.command()
 async def 오늘의운세(ctx):
