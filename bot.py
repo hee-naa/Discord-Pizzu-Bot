@@ -3,7 +3,9 @@ from discord.ext import commands
 
 import random
 import re
-from datetime import date
+from datetime import datetime, date
+from pytz import timezone
+import requests
 
 bot=commands.Bot(command_prefix='!')
 
@@ -130,6 +132,50 @@ async def 생축(ctx):
     embed = discord.Embed(color=0xb0c9d4)
     embed.set_image(url='https://blog.kakaocdn.net/dn/cweeN8/btqNqeqK3U2/JM8NikD3KtsQXmLuYRwwkK/img.gif')
     await ctx.channel.send('담댁 생일 축하해~! 🎂🎉', embed=embed)
+
+@bot.command()
+async def 입실(ctx):
+    mem = await ctx.message.guild.fetch_member(ctx.author.id)
+    if mem.nick is None:
+        fullnick = await bot.fetch_user(ctx.author.id)
+        nick = fullnick.name
+    else:
+        nick = mem.nick
+
+    now = datetime.now(timezone('Asia/Seoul'))
+    date = now.date()
+    time = now.time()
+
+    url = 'https://hooks.zapier.com/hooks/catch/11309133/bdkcq8g/'
+    data = {
+        'name' : nick,
+        'date' : date,
+        'intime' : time
+    }
+    requests.post(url, data=data)
+    await ctx.channel.send(nick + ' 입실 완료 아자아자!')
+
+@bot.command()
+async def 퇴실(ctx):
+    mem = await ctx.message.guild.fetch_member(ctx.author.id)
+    if mem.nick is None:
+        fullnick = await bot.fetch_user(ctx.author.id)
+        nick = fullnick.name
+    else:
+        nick = mem.nick
+
+    now = datetime.now(timezone('Asia/Seoul'))
+    date = now.date()
+    time = now.time()
+
+    url = 'https://hooks.zapier.com/hooks/catch/11309133/bdkxwwd/'
+    data = {
+        'name' : nick,
+        'date' : date,
+        'outtime' : time
+    }
+    requests.post(url, data=data)
+    await ctx.channel.send(nick + ' 퇴실 완료 수고했고~')
 
 @bot.command()
 async def 오늘의운세(ctx):
