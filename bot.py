@@ -182,7 +182,7 @@ async def 퇴실(ctx):
 
 @bot.command()
 async def 간식(ctx):
-    embed = discord.Embed(title='먹고싶은 간식을 고르세요', color=0xb0c9d4)
+    embed = discord.Embed(title='먹고싶은 간식을 고르세요', description='돗쥐의 독서실 간식 목록', color=0xb0c9d4)
     embed.add_field(name='팬케이크', value='🥞')
     embed.add_field(name='딸기 케이크', value='🍰')
     embed.add_field(name='이삭토스트', value='🥪')
