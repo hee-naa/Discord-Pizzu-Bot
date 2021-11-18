@@ -27,8 +27,6 @@ async def 도움말(ctx):
     embed.add_field(name='`!마법피쭈`', value='마법의 소라고둥 피쭈 버전', inline=False)
     embed.add_field(name='`!오늘의운세`', value='오늘의 운세', inline=False)
     embed.add_field(name='`!콜마넴 @누구 @누구 @누구`', value='콜마이네임 게임하기(본인 포함)', inline=False)
-    embed.add_field(name='`!입실`', value='돗쥐의 독서실 입실', inline=False)
-    embed.add_field(name='`!퇴실`', value='돗쥐의 독서실 퇴실', inline=False)
 
     await ctx.channel.send(embed=embed, reference=ctx.message)
 
@@ -54,7 +52,7 @@ async def 마법피쭈(ctx):
 
 @bot.command()
 async def 콜마넴(ctx, *, text):
-    embed = discord.Embed(title='주제를 고르세연', color=0xb0c9d4)
+    embed = discord.Embed(title='주제를 고르세요', color=0xb0c9d4)
     embed.add_field(name='동물', value='🐶')
     embed.add_field(name='인물', value='🧑🏻')
     msg = await ctx.channel.send(embed=embed)
@@ -155,7 +153,7 @@ async def 입실(ctx):
         'intime' : time
     }
     requests.post(url, data=data)
-    await ctx.channel.send(nick + ' 입실 완료')
+    await ctx.channel.send(nick + ' 입실 완료 아자아자!')
 
 @bot.command()
 async def 퇴실(ctx):
@@ -177,7 +175,62 @@ async def 퇴실(ctx):
         'outtime' : time
     }
     requests.post(url, data=data)
-    await ctx.channel.send(nick + ' 퇴실 완료')
+    await ctx.channel.send(nick + ' 퇴실 완료 수고했고~')
+
+@bot.command()
+async def 간식(ctx):
+    embed = discord.Embed(title='먹고싶은 간식을 고르세요', color=0xb0c9d4)
+    embed.add_field(name='팬케이크', value='🥞')
+    embed.add_field(name='딸기 케이크', value='🍰')
+    embed.add_field(name='이삭토스트', value='🥪')
+    embed.add_field(name='쉑쉑버거', value='🍔')
+    embed.add_field(name='도미노피자', value='🍕')
+    embed.add_field(name='푸딩', value='🍮')
+    embed.add_field(name='고디바 초콜릿', value='🍫')
+    embed.add_field(name='펭이가 만든 쿠키', value='🍪')
+    embed.add_field(name='포춘쿠키', value='🥠')
+    msg = await ctx.channel.send(embed=embed)
+
+    await msg.add_reaction('🥞')
+    await msg.add_reaction('🍰')
+    await msg.add_reaction('🥪')
+    await msg.add_reaction('🍔')
+    await msg.add_reaction('🍕')
+    await msg.add_reaction('🍮')
+    await msg.add_reaction('🍫')
+    await msg.add_reaction('🍪')
+    await msg.add_reaction('🥠')
+
+    try:
+        def check(reaction, user):
+            return str(reaction) in ['🥞','🍰','🥪','🍔','🍕','🍮','🍫','🍪','🥠'] and \
+            user == ctx.author and reaction.message.id == msg.id
+        reaction, user = await bot.wait_for('reaction_add', check=check)
+        if (str(reaction) == '🥞'):
+            embed = discord.Embed(title='🥞🥞🥞', color=0xb0c9d4)
+        elif (str(reaction) == '🍰'):
+            embed = discord.Embed(title='🍰🍰🍰', color=0xb0c9d4)
+        elif (str(reaction) == '🥪'):
+            embed = discord.Embed(title='🥪🥪🥪', color=0xb0c9d4)
+        elif (str(reaction) == '🍔'):
+            embed = discord.Embed(title='🍔🍔🍔', color=0xb0c9d4)
+        elif (str(reaction) == '🍕'):
+            embed = discord.Embed(title='🍕🍕🍕', color=0xb0c9d4)
+        elif (str(reaction) == '🍮'):
+            embed = discord.Embed(title='🍮🍮🍮', color=0xb0c9d4)
+        elif (str(reaction) == '🍫'):
+            embed = discord.Embed(title='🍫🍫🍫', color=0xb0c9d4)
+        elif (str(reaction) == '🍪'):
+            embed = discord.Embed(title='🍪🍪🍪', description='펭이 제공', color=0xb0c9d4)
+        elif (str(reaction) == '🥠'):
+            list = ['오늘은 일찍 자세요', '내일은 치킨을 드세요', '피쭈에게 선물을 하세요', '내일 행운이 올 겁니다', '근심이 사라질 겁니다',
+                    '게임을 너무 많이 하네요', '당신은 점점 배고파진다', '귀인이 찾아올 겁니다', '물을 많이 드세요', '조만간 돈이 들어옵니다']
+            num = random.randint(0,9)
+            fortune = list[num]
+            embed = discord.Embed(title='🥠🥠🥠', description=fortune, color=0xb0c9d4)
+        await msg.clear_reactions()
+        await msg.edit(embed=embed)
+    except: pass
 
 @bot.command()
 async def 오늘의운세(ctx):
