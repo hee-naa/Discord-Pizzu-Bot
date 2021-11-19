@@ -164,7 +164,7 @@ async def 입실(ctx):
         'intime' : time
     }
     requests.post(url, data=data)
-    await ctx.channel.send(nick + ' 입실 완료 아자아자!')
+    await ctx.channel.send(nick + ' 입실 완료')
 
 @bot.command()
 async def 퇴실(ctx):
@@ -186,7 +186,7 @@ async def 퇴실(ctx):
         'outtime' : time
     }
     requests.post(url, data=data)
-    await ctx.channel.send(nick + ' 퇴실 완료 수고했고~')
+    await ctx.channel.send(nick + ' 퇴실 완료')
 
 @bot.command()
 async def 간식(ctx):
