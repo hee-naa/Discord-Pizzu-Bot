@@ -8,7 +8,7 @@ bot=commands.Bot(command_prefix='-')
 @bot.event
 async def on_ready():
     print('연결이 완료되었습니다.')
-    await bot.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="!도움말"))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="눈나들 명령(-tts)"))
 
 @bot.command()
 async def tts(ctx, *, text):
