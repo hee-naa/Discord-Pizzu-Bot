@@ -3,6 +3,7 @@ from discord.ext import commands
 
 import random
 import re
+
 from datetime import datetime, date
 from pytz import timezone
 import requests
@@ -38,6 +39,10 @@ async def 하이(ctx):
     await ctx.channel.send('하이루', reference=ctx.message)
 
 @bot.command()
+async def 칵(ctx):
+    await ctx.channel.send('칵 그냥!', reference=ctx.message)
+
+@bot.command()
 async def 나가(ctx):
     num = random.randint(0,1)
     res = ['가나', '니가 나가']
@@ -50,10 +55,6 @@ async def 동동주줘(ctx):
 @bot.command()
 async def 흡(ctx):
     await ctx.channel.send('💩', reference=ctx.message)
-
-@bot.command()
-async def 이모(ctx):
-    await ctx.channel.send('똥 잘 싸지?')
 
 @bot.command()
 async def 마법피쭈(ctx):
