@@ -26,6 +26,12 @@ async def tts(ctx, *, text):
         audio_source = await discord.FFmpegOpusAudio.from_probe('tts.mp3')
         voice.play(audio_source)
     else:
-        await ctx.channel.send("음성 채널에 들어가서 써줘 눈나")
+        await ctx.channel.send('음성 채널에 들어가서 써줘 눈나')
+
+@bot.event
+async def on_typing(channel, user, when):
+    min = when.minute
+    if min % 13 == 0:
+        await channel.send('어? ' + user.display_name + '눈나 뭐 치고 있네?')
 
 bot.run('OTE3NjQzMjQ1OTU2MjU1ODI0.Ya7r3g.SeW2M5StP4u6Jopw_YxCBy7uSL0')
