@@ -1,9 +1,13 @@
+from re import T
 import discord
+from discord import channel
 from discord.ext import commands
 
 from gtts import gTTS
 
-bot=commands.Bot(command_prefix='-')
+intents = discord.Intents.default()
+intents.members = True
+bot=commands.Bot(command_prefix='-', intents = intents)
 
 @bot.event
 async def on_ready():
@@ -16,7 +20,7 @@ async def tts(ctx, *, text):
         channel = ctx.author.voice.channel
         voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
 
-        if voice == None:
+        if voice is None:
             voice = await channel.connect()
             await ctx.guild.change_voice_state(channel=channel, self_deaf=True)
 
@@ -30,8 +34,33 @@ async def tts(ctx, *, text):
 
 @bot.event
 async def on_typing(channel, user, when):
-    min = when.minute
-    if min % 13 == 0:
+    if when.minute % 13 == 0 and when.second == 30:
         await channel.send('어? ' + user.display_name + '눈나 뭐 치고 있네?')
+
+@bot.event
+async def on_member_update(before, after):
+    if before.display_name != after.display_name:
+        channels = before.guild.text_channels
+        for channel in channels:
+            if channel.name == '일반':
+                await channel.send('어? ' + before.display_name + '눈나 별명 바꿨네ㅎ 이제 ' + after.display_name + '눈나라고 부르면 될까?')
+                break
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    channel = bot.get_channel(payload.channel_id)
+    msg = await channel.fetch_message(payload.message_id)
+    await msg.add_reaction(payload.emoji)
+
+@bot.event
+async def on_voice_state_update(member, before, after):
+    voice = before.channel if after.channel is None else after.channel
+    members = voice.members
+    if len(members) == 1 and members[0].bot is True and members[0].display_name == '읍준':
+        channels = member.guild.text_channels
+        for channel in channels:
+            if channel.name == '일반':
+                await channel.send('어? 눈나들 다 나갔네 준이 다음에 또 불러줘ㅎ')
+                break
 
 bot.run('OTE3NjQzMjQ1OTU2MjU1ODI0.Ya7r3g.SeW2M5StP4u6Jopw_YxCBy7uSL0')
