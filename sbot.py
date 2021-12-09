@@ -1,3 +1,5 @@
+import requests
+
 import discord
 from discord.ext import commands
 
@@ -61,5 +63,10 @@ async def on_voice_state_update(member, before, after):
             if channel.name == '일반':
                 await channel.send('어? 눈나들 다 나갔네 준이 다음에 또 불러줘ㅎ')
                 break
+
+@bot.command()
+async def send_message_marin(ctx, *, text):
+    channel = bot.get_channel(843710788656824343)
+    await channel.send(text)
 
 bot.run('OTE3NjQzMjQ1OTU2MjU1ODI0.Ya7r3g.SeW2M5StP4u6Jopw_YxCBy7uSL0')
