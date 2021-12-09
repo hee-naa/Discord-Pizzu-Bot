@@ -1,6 +1,4 @@
-from re import T
 import discord
-from discord import channel
 from discord.ext import commands
 
 from gtts import gTTS
@@ -48,9 +46,10 @@ async def on_member_update(before, after):
 
 @bot.event
 async def on_raw_reaction_add(payload):
-    channel = bot.get_channel(payload.channel_id)
-    msg = await channel.fetch_message(payload.message_id)
-    await msg.add_reaction(payload.emoji)
+    if payload.member.bot is False:
+        channel = bot.get_channel(payload.channel_id)
+        msg = await channel.fetch_message(payload.message_id)
+        await msg.add_reaction(payload.emoji)
 
 @bot.event
 async def on_voice_state_update(member, before, after):
